@@ -30,7 +30,7 @@ export default function TrackItem({ trackData, isFav = false }) {
     });
   };
   return (
-    <div className="flex select-none flex-row w-full bg-green-300/20  rounded-md gap-10  md:text-lg text-sm px-2  justify-start items-center">
+    <div className="flex select-none flex-row w-full bg-green-300/20  rounded-md gap-10  md:text-lg text-sm px-2  justify-between items-center">
       <img
         className="max-w-20 h-auto p-1 rounded-sm"
         src={imageUrl}
@@ -38,7 +38,7 @@ export default function TrackItem({ trackData, isFav = false }) {
         loading="lazy"
       />
 
-      <div className=" p-1 w-[15vw] gap-1 h-fit tracking-tighter rounded-md bg-red-300/20 text-center flex flex-col justify-center items-center  ">
+      <div className=" p-1 w-[15vw] gap-1 h-fit tracking-tighter rounded-md  text-center flex flex-col justify-center items-center  ">
         <span className="truncate w-full "> {name} </span>
 
         <span className="flex flex-wrap truncate w-full  justify-center items-center ">
@@ -52,8 +52,13 @@ export default function TrackItem({ trackData, isFav = false }) {
         </span>
       </div>
 
+      <div className="flex flex-col justify-center text-center items-center">
+        <span>Popularity:</span>
+        <span> {popularity} </span>
+      </div>
+
       <a href={external_urls.spotify} rel="noopener noreferrer" target="_blank">
-        Open in Spotify
+        Open on Spotify
       </a>
 
       <div

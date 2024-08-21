@@ -7,17 +7,22 @@ import { Provider as JotaiProvider } from "jotai";
 import HomePage from "./pages/HomePage/HomePage";
 import PlayListPage from "./pages/PlaylistPage/Page";
 import FavoritePage from "./pages/FavoritePage/Page";
+import Error from "./components/Error";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <HomePage />,
+    errorElement: <Error />,
   },
   {
     path: "/favorites",
     element: <FavoritePage />,
   },
-  { path: "/playlists/:playlistid", element: <PlayListPage /> },
+  {
+    path: "/playlists/:playlistid",
+    element: <PlayListPage />,
+  },
 ]);
 
 const root = ReactDOM.createRoot(document.getElementById("root"));

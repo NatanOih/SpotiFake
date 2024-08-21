@@ -1,10 +1,13 @@
 import React from "react";
 import { Link, useParams } from "react-router-dom";
 import Button from "../../components/Button";
+
 import useFetchApi from "../../hooks/useFetchApi";
-import TrackItem from "./TrackItem";
-import { useAtomValue } from "jotai";
-import { favoriteTracksStore } from "../../lib/store";
+
+import Loading from "../../components/Loading";
+import Error from "../../components/Error";
+
+import PlayListContainer from "./PlayListContainer";
 
 export default function PlayListPage() {
   const { playlistid } = useParams();
@@ -12,58 +15,21 @@ export default function PlayListPage() {
 
   const { data: playListData, loading, error } = useFetchApi(playlistURL);
 
-  const favTracks = useAtomValue(favoriteTracksStore);
-
   if (error) {
-    return (
-      <div>
-        something went wrong - {error}
-        <Link to="/">
-          <Button>Home Page</Button>
-        </Link>
-      </div>
-    );
+    return <Error error={error} />;
   }
 
   if (loading) {
-    return (
-      <div className="text-xl flex justify-center items-center gap-4">
-        Loading Playlists Items...
-        <div className=" rounded-full border-0 border-t-2 w-4 h-4 animate-spin border-white " />
-      </div>
-    );
+    return <Loading />;
   }
-
-  const { description, name, followers, id, images, tracks } = playListData;
-
-  const imageUrl = images[0]?.url;
 
   return (
     <div className="flex justify-center gap-10 p-10 items-center min-h-screen flex-col">
-      <span> {name} </span>
-      <span> {description} </span>
-      <span> followers: {followers.total} </span>
       <Link to="/">
         <Button>Go back</Button>
       </Link>
-      <img
-        className="max-w-full h-auto p-2 rounded-sm"
-        src={imageUrl}
-        alt={name}
-        loading="lazy"
-      />
 
-      <div className="flex justify-start items-start flex-col gap-2 ">
-        {tracks.items.map((item) => {
-          return (
-            <TrackItem
-              key={item.track.id}
-              isFav={!!favTracks[item.track.id]}
-              trackData={item.track}
-            />
-          );
-        })}
-      </div>
+      <PlayListContainer playListData={playListData} />
 
       <Link to="/">
         <Button>Go back</Button>

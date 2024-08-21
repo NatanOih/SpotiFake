@@ -5,25 +5,18 @@ import useSpotifyAccess from "../../hooks/useSpotifyAccess";
 import FaeturedPlaylists from "./FaeturedPlaylists";
 import Button from "../../components/Button";
 import { HeartIcon } from "../../components/HeartIcon";
+import Error from "../../components/Error";
+import Loading from "../../components/Loading";
 
 export default function HomePage() {
   const { spotifyToken, spotifyTokenError, loadingToken } = useSpotifyAccess();
 
-  if (loadingToken) {
-    return <div>Loading Token...</div>;
+  if (spotifyTokenError) {
+    return <Error error={spotifyTokenError} />;
   }
 
-  if (spotifyTokenError) {
-    return (
-      <div>
-        <h1>something went wrong with the token... </h1>
-        <span> {spotifyTokenError}</span>
-
-        <Link className="" to="/">
-          <Button className={""}>go back</Button>
-        </Link>
-      </div>
-    );
+  if (loadingToken) {
+    return <Loading />;
   }
 
   return (
