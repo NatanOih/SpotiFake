@@ -8,7 +8,6 @@ import Headline from "../../components/Headline";
 
 export default function FavoritePage() {
   const favTracks = useAtomValue(favoriteTracksStore);
-  console.log("favTracks", favTracks);
 
   if (!favTracks) {
     return <div></div>;

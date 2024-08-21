@@ -9,7 +9,7 @@ import Error from "../../components/Error";
 import Loading from "../../components/Loading";
 
 export default function HomePage() {
-  const { spotifyToken, spotifyTokenError, loadingToken } = useSpotifyAccess();
+  const { spotifyTokenError, loadingToken } = useSpotifyAccess();
 
   if (spotifyTokenError) {
     return <Error error={spotifyTokenError} />;

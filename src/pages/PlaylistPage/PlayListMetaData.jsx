@@ -1,0 +1,23 @@
+import React from "react";
+import Headline from "../../components/Headline";
+import { useAtomValue } from "jotai";
+import { currentPlayListUsedStore } from "../../lib/store";
+
+export default function PlayListMetaData() {
+  const playListData = useAtomValue(currentPlayListUsedStore);
+  const { description, name, followers, images } = playListData;
+  const imageUrl = images[0]?.url;
+  return (
+    <section className="flex flex-col gap-2 max-w-[40vw] text-center justify-center items-center">
+      <Headline> {name} </Headline>
+      <span> {description} </span>
+      <span className=""> followers: {followers.total} </span>
+      <img
+        className="max-w-full h-auto p-2 rounded-lg"
+        src={imageUrl}
+        alt={name}
+        loading="lazy"
+      />
+    </section>
+  );
+}

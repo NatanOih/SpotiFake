@@ -1,7 +1,8 @@
 import React from "react";
 import { HeartIcon } from "../../components/HeartIcon";
-import { useAtom, useSetAtom } from "jotai";
+import { useSetAtom } from "jotai";
 import { favoriteTracksStore } from "../../lib/store";
+import TrackTitles from "./TrackTitles";
 
 export default function TrackItem({ trackData, isFav = false }) {
   const setFavoriteTracks = useSetAtom(favoriteTracksStore);
@@ -30,27 +31,15 @@ export default function TrackItem({ trackData, isFav = false }) {
     });
   };
   return (
-    <div className="flex select-none flex-row w-full bg-green-300/20  rounded-md gap-10  md:text-lg text-sm px-2  justify-between items-center">
+    <div className="flex select-none p-1 h-auto flex-row md:w-full w-fit bg-green-100/30  rounded-md md:gap-10 sm:gap-6 gap-4  md:text-lg text-sm px-2  md:justify-between items-center">
       <img
-        className="max-w-20 h-auto p-1 rounded-sm"
+        className="max-w-20 h-auto border-black border-2  rounded-sm"
         src={imageUrl}
         alt={name}
         loading="lazy"
       />
 
-      <div className=" p-1 w-[15vw] gap-1 h-fit tracking-tighter rounded-md  text-center flex flex-col justify-center items-center  ">
-        <span className="truncate w-full "> {name} </span>
-
-        <span className="flex flex-wrap truncate w-full  justify-center items-center ">
-          {artists.map((artist) => {
-            return (
-              <span className="truncate" key={artist.name}>
-                {artist.name}
-              </span>
-            );
-          })}{" "}
-        </span>
-      </div>
+      <TrackTitles name={name} artists={artists} />
 
       <div className="flex flex-col justify-center text-center items-center">
         <span>Popularity:</span>
