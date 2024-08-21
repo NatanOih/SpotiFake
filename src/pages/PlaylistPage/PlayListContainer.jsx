@@ -17,8 +17,6 @@ export default function PlayListContainer() {
   const { searchInput, setSearchInput, tracksToRender } =
     useFilter(originalTracksArray);
 
-  const handleSort = () => {};
-
   return (
     <section className="flex flex-col gap-4">
       <div className="flex flex-row justify-center items-center">
@@ -36,24 +34,6 @@ export default function PlayListContainer() {
         <PlayListMetaData playListData={playListData} />
       </div>
       <SearchBox searchInput={searchInput} setSearchInput={setSearchInput} />
-
-      {/* <div className="flex select-none flex-row  p-1   rounded-md gap-10  md:text-lg text-sm px-4  justify-center items-center">
-        {titles.map((x) => {
-          return (
-            <div
-              className={`px-5 underline text-lg flex flex-row gap-3 justify-center items-center  text-center`}
-              key={x}
-            >
-              {x}
-              {x === "Popularity" && (
-                <div className="cursor-pointer" onClick={handleSort}>
-                  <SortIcon />
-                </div>
-              )}
-            </div>
-          );
-        })}
-      </div> */}
 
       <TrackList tracksToRender={tracksToRender} />
     </section>
