@@ -20,11 +20,9 @@ export default function PlayListPage() {
   const { data: playListData, loading, error } = useFetchApi(playlistURL);
 
   useEffect(() => {
-    if (error || loading) {
-      return;
+    if (!loading && !error && playListData) {
+      setCurrentPlayList(playListData);
     }
-
-    setCurrentPlayList(playListData);
   }, [error, loading, playListData, setCurrentPlayList]);
 
   if (error) {

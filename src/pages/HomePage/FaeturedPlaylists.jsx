@@ -13,11 +13,9 @@ export default function FaeturedPlaylists() {
   const { data: playListsData, loading, error } = useFetchApi(ENDPOINT);
 
   useEffect(() => {
-    if (error || loading) {
-      return;
+    if (!loading && !error && playListsData) {
+      setPlayListStorage(playListsData);
     }
-
-    setPlayListStorage(playListsData);
   }, [error, loading, playListsData, setPlayListStorage]);
 
   if (error) {

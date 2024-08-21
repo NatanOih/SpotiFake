@@ -5,8 +5,12 @@ import { currentPlayListUsedStore } from "../../lib/store";
 
 export default function PlayListMetaData() {
   const playListData = useAtomValue(currentPlayListUsedStore);
-  const { description, name, followers, images } = playListData;
-  const imageUrl = images[0]?.url;
+
+  const description = playListData?.description || "";
+  const name = playListData?.name || "";
+  const followers = playListData?.followers?.total || 0;
+  const imageUrl = playListData?.images?.[0]?.url || "";
+
   return (
     <section className="flex flex-col gap-2 max-w-[40vw] text-center justify-center items-center">
       <Headline> {name} </Headline>

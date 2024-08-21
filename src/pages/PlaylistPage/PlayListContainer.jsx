@@ -3,7 +3,7 @@ import React from "react";
 import { useAtomValue } from "jotai";
 import { currentPlayListUsedStore, playListDataStore } from "../../lib/store";
 import useFilter from "../../hooks/useFilter";
-import SortIcon from "../../components/SortIcon";
+
 import SearchBox from "../../components/SearchBox";
 import PlayListMetaData from "./PlayListMetaData";
 import TrackList from "./TrackList";
@@ -12,7 +12,7 @@ import PlaylistItem from "../HomePage/PlaylistItem";
 export default function PlayListContainer() {
   const playListData = useAtomValue(currentPlayListUsedStore);
   const ALLplayLists = useAtomValue(playListDataStore);
-  const originalTracksArray = playListData.tracks?.items;
+  const originalTracksArray = playListData.tracks?.items || [];
 
   const { searchInput, setSearchInput, tracksToRender } =
     useFilter(originalTracksArray);
@@ -31,7 +31,7 @@ export default function PlayListContainer() {
             );
           })}
         </div>
-        <PlayListMetaData playListData={playListData} />
+        <PlayListMetaData />
       </div>
       <SearchBox searchInput={searchInput} setSearchInput={setSearchInput} />
 
