@@ -1,79 +1,61 @@
-import React, { useEffect, useState } from "react";
-import Headline from "../../components/Headline";
-import SearchIcon from "../../components/SearchIcon";
-import TrackItem from "./TrackItem";
+import React from "react";
+
 import { useAtomValue } from "jotai";
-import { favoriteTracksStore } from "../../lib/store";
+import { currentPlayListUsedStore, playListDataStore } from "../../lib/store";
+import useFilter from "../../hooks/useFilter";
+import SortIcon from "../../components/SortIcon";
+import SearchBox from "../../components/SearchBox";
+import PlayListMetaData from "./PlayListMetaData";
+import TrackList from "./TrackList";
+import PlaylistItem from "../HomePage/PlaylistItem";
 
-export default function PlayListContainer({ playListData }) {
-  const [searchTrack, setSearchTrack] = useState("");
-  const [filteredData, setFilteredData] = useState({});
+export default function PlayListContainer() {
+  const playListData = useAtomValue(currentPlayListUsedStore);
+  const ALLplayLists = useAtomValue(playListDataStore);
+  const originalTracksArray = playListData.tracks?.items;
 
-  const { description, name, followers, id, images, tracks } = playListData;
-  const originalTracksArray = tracks.items;
-  const imageUrl = images[0]?.url;
-  const favTracks = useAtomValue(favoriteTracksStore);
+  const { searchInput, setSearchInput, tracksToRender } =
+    useFilter(originalTracksArray);
 
-  const titles = ["Image", "Title", "Popularity", "Link", "Favorites"];
-
-  useEffect(() => {
-    const filteredTracks = originalTracksArray.filter((track) => {
-      const trackName = track.track.name;
-
-      return trackName.includes(searchTrack);
-    });
-
-    console.log("filteredTracks", filteredTracks);
-    setFilteredData(filteredTracks);
-  }, [searchTrack, originalTracksArray]);
-
-  const tracksToRender =
-    searchTrack.length > 0 ? filteredData : originalTracksArray;
-  console.log("tracksToRender", tracksToRender);
+  const handleSort = () => {};
 
   return (
-    <div>
-      {" "}
-      <div className="flex flex-col gap-2 justify-center items-center">
-        <Headline> {name} </Headline>
-        <span> {description} </span>
-        <span> followers: {followers.total} </span>
-        <img
-          className="max-w-full h-auto p-2 rounded-lg"
-          src={imageUrl}
-          alt={name}
-          loading="lazy"
-        />
+    <section className="flex flex-col gap-4">
+      <div className="flex flex-row justify-center items-center">
+        <div className="sm:flex flex-wrap overflow-y-auto p-2 absolute left-8 top-[5%] hidden overflow-x-hidden overscroll-auto sm:max-h-[50vh] xl:max-h-[80vh] lg:max-h-[55vh] w-[20vw] justify-center items-center gap-14 ">
+          {ALLplayLists.playlists?.items.map((playlist) => {
+            return (
+              <PlaylistItem
+                enableTooltip={false}
+                playlistData={playlist}
+                key={playlist.id}
+              />
+            );
+          })}
+        </div>
+        <PlayListMetaData playListData={playListData} />
       </div>
-      <div className="flex gap-2 justify-center items-center">
-        <SearchIcon />
-        <input
-          placeholder="search track"
-          className="bg-gray-300/30 p-1 rounded-lg"
-          value={searchTrack}
-          onChange={(e) => setSearchTrack(e.target.value)}
-        />
-      </div>
-      <div className="flex select-none flex-row  p-1   rounded-md gap-10  md:text-lg text-sm px-4  justify-center items-center">
+      <SearchBox searchInput={searchInput} setSearchInput={setSearchInput} />
+
+      {/* <div className="flex select-none flex-row  p-1   rounded-md gap-10  md:text-lg text-sm px-4  justify-center items-center">
         {titles.map((x) => {
           return (
-            <div className={`px-5 underline text-lg  text-center`} key={x}>
+            <div
+              className={`px-5 underline text-lg flex flex-row gap-3 justify-center items-center  text-center`}
+              key={x}
+            >
               {x}
+              {x === "Popularity" && (
+                <div className="cursor-pointer" onClick={handleSort}>
+                  <SortIcon />
+                </div>
+              )}
             </div>
           );
         })}
-      </div>
-      <div className="flex justify-start items-start flex-col gap-2 ">
-        {tracksToRender.map((item) => {
-          return (
-            <TrackItem
-              key={item.track.id}
-              isFav={!!favTracks[item.track.id]}
-              trackData={item.track}
-            />
-          );
-        })}
-      </div>
-    </div>
+      </div> */}
+
+      <TrackList tracksToRender={tracksToRender} />
+    </section>
   );
 }
