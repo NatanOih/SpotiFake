@@ -17,21 +17,26 @@ export default function PlayListPage() {
   const { playlistid } = useParams();
   const playlistURL = `https://api.spotify.com/v1/playlists/${playlistid}`;
 
-  const { data: playListData, loading, error } = useFetchApi(playlistURL);
+  // const { data: playListData, loading, error } = useFetchApi(playlistURL);
+  const { data: playListData } = useFetchApi(playlistURL);
 
   useEffect(() => {
-    if (!loading && !error && playListData) {
+    if (playListData) {
       setCurrentPlayList(playListData);
     }
-  }, [error, loading, playListData, setCurrentPlayList]);
 
-  if (error) {
-    return <Error error={error} />;
-  }
+    return () => {
+      setCurrentPlayList([]);
+    };
+  }, [playListData, setCurrentPlayList]);
 
-  if (loading) {
-    return <Loading />;
-  }
+  // if (error) {
+  //   return <Error error={error} />;
+  // }
+
+  // if (loading) {
+  //   return <Loading />;
+  // }
 
   return (
     <div className="flex justify-center gap-10 p-10 items-center min-h-screen flex-col">

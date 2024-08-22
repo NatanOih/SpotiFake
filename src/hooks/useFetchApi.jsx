@@ -1,6 +1,8 @@
 import { useAtomValue } from "jotai";
 import { useEffect, useRef, useState } from "react";
 import { token } from "../lib/store";
+import Loading from "../components/Loading";
+import Error from "../components/Error";
 
 export default function useFetchApi(url) {
   const [data, setData] = useState({});
@@ -35,6 +37,10 @@ export default function useFetchApi(url) {
 
         setData(parsedFetchedData);
       } catch (err) {
+        if (err.name === "AbortError") {
+          console.log("Aborted");
+          return;
+        }
         setError(err.message);
       }
 
@@ -44,5 +50,14 @@ export default function useFetchApi(url) {
     fetchData();
   }, [url, spotifyToken]);
 
-  return { data, loading, error };
+  if (error) {
+    return <Error error={error} />;
+  }
+
+  if (loading) {
+    return <Loading />;
+  }
+
+  // return { data, loading, error };
+  return { data };
 }

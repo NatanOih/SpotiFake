@@ -12,7 +12,7 @@ import PlaylistItem from "../HomePage/PlaylistItem";
 export default function PlayListContainer() {
   const [playListData, setPlayListData] = useAtom(currentPlayListUsedStore);
   const [allPlayLists, setAllPlayLists] = useAtom(playListDataStore);
-  const originalTracksArray = playListData.tracks?.items || [];
+  const originalTracksArray = playListData.tracks?.items;
 
   const { searchInput, setSearchInput } = useFilter(originalTracksArray);
 

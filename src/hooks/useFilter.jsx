@@ -4,7 +4,7 @@ import { useAtom } from "jotai";
 
 export default function useFilter(originalList) {
   const [searchInput, setSearchInput] = useState("");
-  const [filteredData, setFilteredData] = useState({});
+  const [filteredData, setFilteredData] = useState([]);
   const [tracksToRender, setTracksToRender] = useAtom(tracksToRenderStore);
 
   useEffect(() => {

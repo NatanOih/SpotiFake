@@ -1,6 +1,8 @@
 import { useAtom } from "jotai";
 import { useEffect, useState } from "react";
 import { token } from "../lib/store";
+import Error from "../components/Error";
+import Loading from "../components/Loading";
 
 export default function useSpotifyAccess() {
   const [spotifyToken, setSpotifyToken] = useAtom(token);
@@ -44,7 +46,16 @@ export default function useSpotifyAccess() {
     };
 
     fetchToken();
-  }, [spotifyToken]);
+  }, [spotifyToken, setSpotifyToken]);
 
-  return { spotifyToken, spotifyTokenError, loadingToken };
+  if (spotifyTokenError) {
+    return <Error error={spotifyTokenError} />;
+  }
+
+  if (loadingToken) {
+    return <Loading />;
+  }
+
+  // return { spotifyToken, spotifyTokenError, loadingToken };
+  return { spotifyToken };
 }
