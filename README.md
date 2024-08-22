@@ -1,12 +1,12 @@
 # Natan`s Fake Spotify
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).\
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-Libraries included: Jotai for state managment, Tailwind for UI.\
+Libraries included: Jotai for state managment, Tailwind for UI.
 
-Fully respobsive for Mobile and Desktop.\
+Fully respobsive for Mobile and Desktop.
 
-Deployed at vercel: https://spoti-fake.vercel.app/ \
+Deployed at vercel: https://spoti-fake.vercel.app/ 
 
 
 
