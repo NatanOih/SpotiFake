@@ -15,7 +15,7 @@ export default function Nav2() {
 
   return (
     <nav
-      className={`${NavBg} p-2 z-50 px-10 sticky top-0 w-screen overflow-hidden flex flex-row sm:justify-between justify-center items-center `}
+      className={`${NavBg} p-2 z-50 px-10 sticky top-0 max-w-screen overflow-hidden flex flex-row sm:justify-between justify-center items-center `}
     >
       <Headline className=" xl:text-4xl lg:text-3xl md:text-xl sm:text-lg hidden sm:inline-block  text-nowrap">
         hello /// Welcome to SpotiFake
