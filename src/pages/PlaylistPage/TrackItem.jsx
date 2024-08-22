@@ -3,8 +3,13 @@ import { HeartIcon } from "../../components/HeartIcon";
 import { useSetAtom } from "jotai";
 import { favoriteTracksStore } from "../../lib/store";
 import TrackNames from "./TrackNames";
+import { DeleteIcon } from "../../components/DeleteIcon";
 
-export default function TrackItem({ trackData, isFav = false }) {
+export default function TrackItem({
+  enableDeleteIcon = false,
+  trackData,
+  isFav = false,
+}) {
   const setFavoriteTracks = useSetAtom(favoriteTracksStore);
 
   const { id, popularity, artists, name, album, external_urls } = trackData;
@@ -58,7 +63,11 @@ export default function TrackItem({ trackData, isFav = false }) {
         className={`cursor-pointer px-1   hover:text-red-100/50 }`}
         onClick={handleFav}
       >
-        <HeartIcon fill={isFav ? "red" : "none"} />
+        {enableDeleteIcon ? (
+          <DeleteIcon />
+        ) : (
+          <HeartIcon fill={isFav ? "red" : "none"} />
+        )}
       </div>
     </div>
   );
