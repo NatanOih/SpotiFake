@@ -11,13 +11,13 @@ import Loading from "../../components/Loading";
 export default function HomePage() {
   const { spotifyTokenError, loadingToken } = useSpotifyAccess();
 
-  if (spotifyTokenError) {
-    return <Error error={spotifyTokenError} />;
-  }
+  // if (spotifyTokenError) {
+  //   return <Error error={spotifyTokenError} />;
+  // }
 
-  if (loadingToken) {
-    return <Loading />;
-  }
+  // if (loadingToken) {
+  //   return <Loading />;
+  // }
 
   return (
     <section className="flex flex-col h-screen p-10 pt-24 gap-2 justify-between items-center">

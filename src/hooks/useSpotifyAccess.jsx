@@ -1,5 +1,5 @@
 import { useAtom } from "jotai";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { token } from "../lib/store";
 import Error from "../components/Error";
 import Loading from "../components/Loading";
@@ -8,6 +8,7 @@ export default function useSpotifyAccess() {
   const [spotifyToken, setSpotifyToken] = useAtom(token);
   const [spotifyTokenError, setSpotifyTokenError] = useState(null);
   const [loadingToken, setLoadingToken] = useState(false);
+  const abortContollerRef = useRef();
 
   useEffect(() => {
     if (spotifyToken) {
@@ -19,7 +20,11 @@ export default function useSpotifyAccess() {
     const encodedCredentials = btoa(`${clientId}:${clientSecret}`);
 
     const fetchToken = async () => {
+      abortContollerRef.current?.abort();
+      abortContollerRef.current = new AbortController();
+
       const authOptions = {
+        signal: abortContollerRef.current?.signal,
         method: "POST",
         headers: {
           Authorization: "Basic " + encodedCredentials,
@@ -39,6 +44,10 @@ export default function useSpotifyAccess() {
         const data = await response.json();
         setSpotifyToken(data["access_token"]);
       } catch (err) {
+        if (err.name === "AbortError") {
+          console.log("Aborted auth");
+          return;
+        }
         setSpotifyTokenError(err.message);
       }
 

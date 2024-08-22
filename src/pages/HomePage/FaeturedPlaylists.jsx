@@ -10,21 +10,14 @@ const ENDPOINT = "https://api.spotify.com/v1/browse/featured-playlists";
 
 export default function FaeturedPlaylists() {
   const [, setPlayListStorage] = useAtom(playListDataStore);
-  const { data: playListsData, loading, error } = useFetchApi(ENDPOINT);
+  const { data: playListsData } = useFetchApi(ENDPOINT);
 
   useEffect(() => {
-    if (!loading && !error && playListsData) {
+    //sync atom state with fetched data
+    if (playListsData) {
       setPlayListStorage(playListsData);
     }
-  }, [error, loading, playListsData, setPlayListStorage]);
-
-  if (error) {
-    return <Error error={error} />;
-  }
-
-  if (loading) {
-    return <Loading />;
-  }
+  }, [playListsData, setPlayListStorage]);
 
   return (
     <section className="flex flex-col justify-center gap-10 items-center">
