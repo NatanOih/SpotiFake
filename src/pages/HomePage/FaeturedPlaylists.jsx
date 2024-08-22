@@ -1,7 +1,5 @@
 import React, { useEffect } from "react";
 import useFetchApi from "../../hooks/useFetchApi";
-import Loading from "../../components/Loading";
-import Error from "../../components/Error";
 import { useAtom } from "jotai";
 import { playListDataStore } from "../../lib/store";
 import PlayLists from "./PlayLists";
