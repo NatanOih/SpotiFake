@@ -1,10 +1,9 @@
 import { useAtom } from "jotai/react";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { favoriteTracksStore, tracksToRenderStore } from "../../lib/store";
 import TrackItem from "./TrackItem";
 import SortIcon from "../../components/SortIcon";
 import Loading from "../../components/Loading";
-import { areArraysEqual } from "../../lib/helpers";
 
 export default function TrackList() {
   const [tracksToRender, setTracksToRender] = useAtom(tracksToRenderStore);
@@ -29,23 +28,26 @@ export default function TrackList() {
   }
 
   return (
-    <div className="flex select-none rounded-md border-2 border-black max-h-[50vh] bg-yellow-200/10 items-center  overflow-y-scroll overscroll-auto p-3  flex-col gap-4 ">
-      <div className="flex flex-row   justify-between px-5">
+    <div className="flex select-none rounded-sm border-2 max-w-[95vw] border-black max-h-[50vh] bg-orange-700/30 items-center  overflow-y-scroll overscroll-auto p-2  flex-col gap-4 ">
+      <div className="flex flex-row  justify-between px-1">
         {titles.map((title) => {
           return (
             <div
-              className="flex min-w-14 flex-row px-4 justify-center gap-2 items-center "
+              className="flex flex-row px-2  justify-center gap-2 items-center "
               key={title}
             >
-              <span>{title}</span>
-              {title === "Popularity" && (
-                <div
-                  className="cursor-pointer hover:text-red-700"
-                  onClick={handleSort}
-                >
-                  <SortIcon />
-                </div>
-              )}
+              <span className="flex flex-row">
+                {title}
+
+                {title === "Popularity" && (
+                  <div
+                    className="cursor-pointer hover:text-red-700"
+                    onClick={handleSort}
+                  >
+                    <SortIcon />
+                  </div>
+                )}
+              </span>
             </div>
           );
         })}

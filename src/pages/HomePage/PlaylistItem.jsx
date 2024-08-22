@@ -21,8 +21,11 @@ export default function PlaylistItem({ playlistData, enableTooltip = true }) {
       >
         <div className="flex flex-col justify-center text-center items-center">
           <span className="font-bold text-xl"> {name} </span>
-          <span> Playlist Owner: {owner.display_name} </span>
-          <span> Number of Tracks : {tracks.total} </span>
+          <span className="truncate">
+            {" "}
+            Playlist Owner: {owner.display_name}{" "}
+          </span>
+          <span className="truncate"> Number of Tracks : {tracks.total} </span>
           <Tooltip isShowing={toolTip && enableTooltip}>{description}</Tooltip>
         </div>
 
