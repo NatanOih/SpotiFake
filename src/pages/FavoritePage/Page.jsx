@@ -1,5 +1,5 @@
 import { useAtom, useAtomValue } from "jotai";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   darkModeStorage,
   favoriteTracksStore,
@@ -9,17 +9,30 @@ import TrackItem from "../PlaylistPage/TrackItem";
 
 import Nav from "../../components/Nav";
 import PlaylistItem from "../HomePage/PlaylistItem";
-import TrackList from "../PlaylistPage/TrackList";
 import SortIcon from "../../components/SortIcon";
 
 export default function FavoritePage() {
   const darkMode = useAtomValue(darkModeStorage);
   const favTracks = useAtomValue(favoriteTracksStore);
+  const tracksArray = Object.values(favTracks);
+  const [favTracksToRender, setFavTracksToRender] = useState([]);
+  const [sorted, setSorted] = useState(false);
   const [allPlayLists, setAllPlayLists] = useAtom(playListDataStore);
 
-  if (!favTracks) {
-    return <div></div>;
-  }
+  useEffect(() => {
+    setFavTracksToRender(tracksArray);
+  }, [favTracks]);
+
+  const handleSort = () => {
+    if (sorted) {
+      tracksArray.sort((a, b) => a.popularity - b.popularity);
+    } else {
+      tracksArray.sort((a, b) => b.popularity - a.popularity);
+    }
+    setFavTracksToRender(tracksArray);
+    setSorted(!sorted);
+  };
+
   return (
     <>
       <Nav />
@@ -42,7 +55,7 @@ export default function FavoritePage() {
               Popularity
               <div
                 className="cursor-pointer hover:text-red-700"
-                // onClick={handleSort}
+                onClick={handleSort}
               >
                 <SortIcon />
               </div>
@@ -69,12 +82,12 @@ export default function FavoritePage() {
             !darkMode && "bg-black/80"
           } flex flex-col max-h-[45vh] overflow-auto p-4 rounded-md gap-4`}
         >
-          {Object.entries(favTracks).map(([id, track]) => {
+          {favTracksToRender.map((track) => {
             return (
               <TrackItem
                 enableDeleteIcon={true}
-                key={id}
-                isFav={!!favTracks[id]}
+                key={track.id}
+                isFav={true}
                 trackData={track}
               />
             );
