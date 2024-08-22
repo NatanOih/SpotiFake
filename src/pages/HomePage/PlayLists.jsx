@@ -9,7 +9,7 @@ export default function PlayLists() {
 
   return (
     <>
-      <Headline className="underline text-6xl decoration-double">
+      <Headline className="underline md:text-6xl  sm:text-5xl text-4xl text-nowrap text-center decoration-double">
         {playListsData?.message}
       </Headline>
 
