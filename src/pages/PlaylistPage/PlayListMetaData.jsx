@@ -17,7 +17,7 @@ export default function PlayListMetaData() {
       <span> {description} </span>
       <span className=""> followers: {followers.total} </span>
       <img
-        className="max-w-full h-auto p-2 rounded-lg"
+        className="max-w-[20vw] h-auto p-2 rounded-lg"
         src={imageUrl}
         alt={name}
         loading="lazy"

@@ -29,7 +29,5 @@ export default function useFilter(originalList) {
     setTracksToRender(updatedTracksToRender);
   }, [searchInput, filteredData, originalList, setTracksToRender]);
 
-  // const tracksToRender = searchInput.length > 0 ? filteredData : originalList;
-
-  return { searchInput, setSearchInput, tracksToRender };
+  return { searchInput, setSearchInput };
 }

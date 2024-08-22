@@ -68,7 +68,6 @@ export default function TrackList() {
             <TrackItem
               key={track.id || index}
               isFav={!!favTracks[track.id]}
-              // isFav={false}
               trackData={track}
             />
           );

@@ -1,5 +1,5 @@
 import { useAtomValue } from "jotai";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { token } from "../lib/store";
 
 export default function useFetchApi(url) {
@@ -7,6 +7,7 @@ export default function useFetchApi(url) {
   const [error, setError] = useState();
   const [loading, setLoading] = useState(true);
   const spotifyToken = useAtomValue(token);
+  const abortContollerRef = useRef();
 
   useEffect(() => {
     if (!spotifyToken) {
@@ -18,9 +19,12 @@ export default function useFetchApi(url) {
     const reqHeader = `Bearer ${spotifyToken}`;
 
     const fetchData = async () => {
+      abortContollerRef.current?.abort();
+      abortContollerRef.current = new AbortController();
       try {
         setLoading(true);
         const response = await fetch(url, {
+          signal: abortContollerRef.current?.signal,
           headers: {
             Authorization: reqHeader,
             "Content-Type": "application/json",
