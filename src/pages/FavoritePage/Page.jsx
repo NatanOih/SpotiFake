@@ -47,7 +47,7 @@ export default function FavoritePage() {
           <div>No favorite tracks, Try to add some</div>
         )}
 
-        <div className="flex select-none rounded-md border-2 border-black max-h-[50vh]  bg-orange-700/60 items-center  p-2  flex-col gap-4 ">
+        <div className="flex select-none rounded-md max-w-full border-2 border-black  bg-orange-700/60 items-center  p-2  flex-col gap-4 ">
           <div className="flex flex-row w-full gap-4 justify-between items-center text-center px-1">
             <span className="w-20"> Image </span>
             <span className=" pl-10 w-[20vw]"> Titles </span>
