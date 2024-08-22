@@ -58,6 +58,5 @@ export default function useFetchApi(url) {
     return <Loading />;
   }
 
-  // return { data, loading, error };
   return { data };
 }
