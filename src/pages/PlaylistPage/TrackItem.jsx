@@ -46,7 +46,7 @@ export default function TrackItem({ trackData, isFav = false }) {
       </div>
 
       <a
-        className=" max-w-12 text-wrap text-center px-1 hover:underline "
+        className=" max-w-12 leading-5 items-center justify-center flex text-wrap text-center pl-6 hover:underline "
         href={external_urls.spotify}
         rel="noopener noreferrer"
         target="_blank"

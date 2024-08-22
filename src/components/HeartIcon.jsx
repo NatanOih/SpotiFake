@@ -1,13 +1,14 @@
 import React from "react";
+import { twMerge } from "tailwind-merge";
 
-export const HeartIcon = ({ fill = "none" }) => (
+export const HeartIcon = ({ fill = "none", className }) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     fill={fill}
     viewBox="0 0 24 24"
     strokeWidth={1.5}
     stroke="currentColor"
-    className="size-6"
+    className={twMerge("size-6", className)}
   >
     <path
       strokeLinecap="round"

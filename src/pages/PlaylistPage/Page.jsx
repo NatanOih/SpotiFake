@@ -6,10 +6,13 @@ import Loading from "../../components/Loading";
 import Error from "../../components/Error";
 import PlayListContainer from "./PlayListContainer";
 
-import { currentPlayListUsedStore } from "../../lib/store";
-import { useAtom } from "jotai/react";
+import { currentPlayListUsedStore, darkModeStorage } from "../../lib/store";
+import { useAtom, useAtomValue } from "jotai/react";
+import Nav from "../../components/Nav";
 
 export default function PlayListPage() {
+  const darkMode = useAtomValue(darkModeStorage);
+
   const [currentPlayList, setCurrentPlayList] = useAtom(
     currentPlayListUsedStore
   );
@@ -20,7 +23,6 @@ export default function PlayListPage() {
   const { data: playListData } = useFetchApi(playlistURL);
 
   useEffect(() => {
-    //sync atom state with fetched data
     if (playListData) {
       setCurrentPlayList(playListData);
     }
@@ -31,16 +33,15 @@ export default function PlayListPage() {
   }, [playListData, setCurrentPlayList]);
 
   return (
-    <div className="flex justify-center gap-10 p-10 items-center min-h-screen flex-col">
-      <Link to="/">
-        <Button>Go back</Button>
-      </Link>
-
-      <PlayListContainer />
-
-      <Link to="/">
-        <Button>Go back</Button>
-      </Link>
-    </div>
+    <>
+      <Nav />
+      <div
+        className={`flex ${
+          !darkMode && "bg-[#f5deb3]/90 text-black/80"
+        } justify-center gap-10 p-10 items-center min-h-screen flex-col`}
+      >
+        <PlayListContainer />
+      </div>
+    </>
   );
 }

@@ -28,29 +28,22 @@ export default function TrackList() {
   }
 
   return (
-    <div className="flex select-none rounded-sm border-2 max-w-[95vw] border-black max-h-[50vh] bg-orange-700/30 items-center  overflow-y-scroll overscroll-auto p-2  flex-col gap-4 ">
-      <div className="flex flex-row  justify-between px-1">
-        {titles.map((title) => {
-          return (
-            <div
-              className="flex flex-row px-2  justify-center gap-2 items-center "
-              key={title}
-            >
-              <span className="flex flex-row">
-                {title}
-
-                {title === "Popularity" && (
-                  <div
-                    className="cursor-pointer hover:text-red-700"
-                    onClick={handleSort}
-                  >
-                    <SortIcon />
-                  </div>
-                )}
-              </span>
-            </div>
-          );
-        })}
+    <div className="flex select-none rounded-md border-2 max-w-[95vw] border-black max-h-[50vh]  bg-orange-700/60 items-center  overflow-y-scroll overscroll-auto p-2  flex-col gap-4 ">
+      <div className="flex flex-row w-full gap-4 justify-between items-center text-center px-1">
+        <span className="w-20"> Image </span>
+        <span className=" pl-10 w-[20vw]"> Titles </span>
+        <span className="flex flex-row justify-center gap-1 items-center">
+          {" "}
+          Popularity{" "}
+          <div
+            className="cursor-pointer hover:text-red-700"
+            onClick={handleSort}
+          >
+            <SortIcon />
+          </div>{" "}
+        </span>
+        <span className="w-10 pr-4"> Link </span>
+        <span className="w-10"> </span>
       </div>
       {tracksToRender?.length ? (
         tracksToRender.map((item, index) => {

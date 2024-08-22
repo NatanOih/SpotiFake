@@ -8,6 +8,7 @@ import HomePage from "./pages/HomePage/HomePage";
 import PlayListPage from "./pages/PlaylistPage/Page";
 import FavoritePage from "./pages/FavoritePage/Page";
 import Error from "./components/Error";
+import Nav from "./components/Nav";
 
 const router = createBrowserRouter([
   {
@@ -27,11 +28,11 @@ const router = createBrowserRouter([
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  // <React.StrictMode>
-  <JotaiProvider>
-    <RouterProvider router={router} />
-  </JotaiProvider>
-  // </React.StrictMode>
+  <React.StrictMode>
+    <JotaiProvider>
+      <RouterProvider router={router}></RouterProvider>
+    </JotaiProvider>
+  </React.StrictMode>
 );
 
 // If you want to start measuring performance in your app, pass a function

@@ -11,3 +11,4 @@ export const currentPlayListUsedStore = atomWithStorage(
 );
 
 export const tracksToRenderStore = atomWithStorage("tracksToRenderStore", []);
+export const darkModeStorage = atomWithStorage("darkModeStorage", true);
