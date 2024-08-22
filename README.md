@@ -12,7 +12,7 @@ In the project directory, you can run:
 
 #### you will need to edit the .env file with your own spotify api keys at https://developer.spotify.com/dashboard
 
-Thoe will be:
+Those will be:
 
 REACT_APP_CLIENT_ID\
 REACT_APP_CLIENT_SECRET
