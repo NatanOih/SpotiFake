@@ -15,6 +15,7 @@ export default function useFetchApi(url) {
     if (!spotifyToken) {
       setError("Not Authenticated");
       setLoading(false);
+      return;
     }
     setError(null);
     const reqHeader = `Bearer ${spotifyToken}`;
