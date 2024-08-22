@@ -1,15 +1,13 @@
 import React, { useEffect } from "react";
-import { Link, useParams } from "react-router-dom";
-import Button from "../../components/Button";
+import { useParams } from "react-router-dom";
+
 import useFetchApi from "../../hooks/useFetchApi";
-import Loading from "../../components/Loading";
-import Error from "../../components/Error";
+
 import PlayListContainer from "./PlayListContainer";
 
 import { currentPlayListUsedStore, darkModeStorage } from "../../lib/store";
 import { useAtom, useAtomValue } from "jotai/react";
 import Nav from "../../components/Nav";
-import Nav2 from "../../components/Nav2";
 
 export default function PlayListPage() {
   const darkMode = useAtomValue(darkModeStorage);
