@@ -14,7 +14,7 @@ In the project directory, you can run:
 
 Thoe will be:
 
-REACT_APP_CLIENT_ID
+REACT_APP_CLIENT_ID\
 REACT_APP_CLIENT_SECRET
 
 Runs the app in the development mode.\
