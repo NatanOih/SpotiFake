@@ -4,6 +4,7 @@ import FaeturedPlaylists from "./FaeturedPlaylists";
 import Nav from "../../components/Nav";
 import { useAtomValue } from "jotai";
 import { darkModeStorage } from "../../lib/store";
+import Nav2 from "../../components/Nav2";
 
 export default function HomePage() {
   const darkMode = useAtomValue(darkModeStorage);

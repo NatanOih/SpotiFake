@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import Button from "../../components/Button";
 import Headline from "../../components/Headline";
 import Nav from "../../components/Nav";
+import Nav2 from "../../components/Nav2";
 
 export default function FavoritePage() {
   const darkMode = useAtomValue(darkModeStorage);

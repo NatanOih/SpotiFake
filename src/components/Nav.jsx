@@ -2,23 +2,22 @@ import React from "react";
 import Headline from "./Headline";
 import { Link } from "react-router-dom";
 import Button from "./Button";
+import { useAtom } from "jotai";
+import { darkModeStorage } from "../lib/store";
 import { HeartIcon } from "./HeartIcon";
 import { DarkIcon } from "./Dark";
 import { LightIcon } from "./Light";
-import { darkModeStorage } from "../lib/store";
-import { useAtom } from "jotai";
 
-export default function Nav() {
+export default function Nav2() {
   const [darkMode, setDarkMode] = useAtom(darkModeStorage);
-
   const ButtonBg = !darkMode ? "bg-red-200/20" : "bg-red-700/20";
   const NavBg = !darkMode ? "bg-red-600/80" : "bg-red-200/30";
 
   return (
     <nav
-      className={` md:top-0 z-50 transition-all absolute md:sticky  md:rotate-0 md:right-auto  rotate-90 -right-24 top-[30%] md:h-20 md:max-w-screen md:w-auto w-fit md:m-0 m-2   overflow-hidden flex flex-row md:justify-between justify-center md:px-10 p-2 items-center text-center  md:rounded-none rounded-sm  ${NavBg} `}
+      className={`${NavBg} p-2 z-50 px-10 sticky top-0 w-screen overflow-hidden flex flex-row sm:justify-between justify-center items-center `}
     >
-      <Headline className=" xl:text-4xl lg:text-3xl md:text-xl text-lg hidden md:inline-block text-nowrap">
+      <Headline className=" xl:text-4xl lg:text-3xl md:text-xl sm:text-lg hidden sm:inline-block  text-nowrap">
         hello /// Welcome to SpotiFake
       </Headline>
       <div className="flex flex-row justify-center items-center  md:gap-10 gap-2">

@@ -9,6 +9,7 @@ import PlayListContainer from "./PlayListContainer";
 import { currentPlayListUsedStore, darkModeStorage } from "../../lib/store";
 import { useAtom, useAtomValue } from "jotai/react";
 import Nav from "../../components/Nav";
+import Nav2 from "../../components/Nav2";
 
 export default function PlayListPage() {
   const darkMode = useAtomValue(darkModeStorage);
