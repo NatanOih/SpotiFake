@@ -2,9 +2,9 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-Libraries included: Jotai for state managment, Tailwind for UI.
+Libraries included: Jotai for state managment, Tailwind for UI, React-Router.
 
-Fully respobsive for Mobile and Desktop.
+Fully respobsive for Mobile and Desktop And has dark theme option, All data is persisted on refreshes and is stored in the local storage .
 
 Deployed at vercel: https://spoti-fake.vercel.app/ 
 
