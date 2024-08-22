@@ -1,26 +1,44 @@
-import { useAtomValue } from "jotai/react";
-import React, { useState } from "react";
-import { favoriteTracksStore } from "../../lib/store";
+import { useAtom } from "jotai/react";
+import React, { useEffect, useState } from "react";
+import { favoriteTracksStore, tracksToRenderStore } from "../../lib/store";
 import TrackItem from "./TrackItem";
 import SortIcon from "../../components/SortIcon";
+import Loading from "../../components/Loading";
 
-export default function TrackList({ tracksToRender }) {
-  const [RenderList, setRenderList] = useState(tracksToRender);
+export default function TrackList() {
+  const [tracksToRender, _] = useAtom(tracksToRenderStore);
+
+  const [RenderList, setRenderList] = useState([]);
+
   const [sorted, setSorted] = useState(false);
+  const [favTracks, _2] = useAtom(favoriteTracksStore);
+
   const titles = ["Image", "Title", "Popularity", "Link", "Favorites"];
-  const favTracks = useAtomValue(favoriteTracksStore);
+
+  useEffect(() => {
+    setRenderList(tracksToRender);
+  }, [tracksToRender]);
 
   const handleSort = () => {
+    const sortedTracks = [...tracksToRender];
     if (sorted) {
-      tracksToRender.sort((a, b) => a.track.popularity - b.track.popularity);
+      sortedTracks.sort((a, b) => a.track.popularity - b.track.popularity);
       setSorted(false);
     } else {
-      setRenderList(
-        tracksToRender.sort((a, b) => b.track.popularity - a.track.popularity)
-      );
+      sortedTracks.sort((a, b) => b.track.popularity - a.track.popularity);
       setSorted(true);
     }
+    setRenderList(sortedTracks);
   };
+
+  if (tracksToRender.length < 1) {
+    return <Loading />;
+  }
+
+  if (RenderList.length < 1) {
+    return <Loading />;
+  }
+
   return (
     <div className="flex select-none rounded-sm border-2 border-black max-h-[50vh] bg-yellow-200/10  overflow-y-scroll overscroll-auto p-3  flex-col gap-4 ">
       <div className="flex flex-row justify-between px-5">
@@ -40,15 +58,24 @@ export default function TrackList({ tracksToRender }) {
           );
         })}
       </div>
-      {RenderList.map((item) => {
-        return (
-          <TrackItem
-            key={item.track.id}
-            isFav={!!favTracks[item.track.id]}
-            trackData={item.track}
-          />
-        );
-      })}
+      {RenderList?.length ? (
+        RenderList.map((item, index) => {
+          const track = item?.track;
+          if (!track) {
+            return null;
+          }
+          return (
+            <TrackItem
+              key={track.id || index}
+              isFav={!!favTracks[track.id]}
+              // isFav={false}
+              trackData={track}
+            />
+          );
+        })
+      ) : (
+        <Loading />
+      )}
     </div>
   );
 }

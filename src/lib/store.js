@@ -9,3 +9,5 @@ export const currentPlayListUsedStore = atomWithStorage(
   "currentPlayListUsedStore",
   {}
 );
+
+export const tracksToRenderStore = atomWithStorage("tracksToRenderStore", []);
