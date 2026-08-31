@@ -13,9 +13,9 @@ export default function TrackList() {
   const handleSort = () => {
     const sortedTracks = [...tracksToRender];
     if (sorted) {
-      sortedTracks.sort((a, b) => a.track.popularity - b.track.popularity);
+      sortedTracks.sort((a, b) => a.track.duration - b.track.duration);
     } else {
-      sortedTracks.sort((a, b) => b.track.popularity - a.track.popularity);
+      sortedTracks.sort((a, b) => b.track.duration - a.track.duration);
     }
     setTracksToRender(sortedTracks);
     setSorted(!sorted);
@@ -32,7 +32,7 @@ export default function TrackList() {
         <span className=" pl-10 w-[20vw]"> Titles </span>
         <span className="flex flex-row justify-center gap-1 items-center">
           {" "}
-          Popularity{" "}
+          Duration{" "}
           <div
             className="cursor-pointer hover:text-red-700"
             onClick={handleSort}

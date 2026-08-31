@@ -18,15 +18,16 @@ In the project directory, you can run:
 
 ### `npm start`
 
-#### you will need to edit the .env file with your own spotify api keys at https://developer.spotify.com/dashboard
+#### you will need to edit the .env file with your own Jamendo client id from https://devportal.jamendo.com
 
-Those will be:
+That will be:
 
-REACT_APP_CLIENT_ID\
-REACT_APP_CLIENT_SECRET
+REACT_APP_JAMENDO_CLIENT_ID
 
 Runs the app in the development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+
+> Originally built against the Spotify Web API, this project migrated to the [Jamendo API](https://developer.jamendo.com) in 2026 after Spotify deprecated Client Credentials access to featured playlists and playlist data for apps without Extended Quota Mode (which now requires a registered business with 250k+ MAU). "Playlists" in the UI now map to Jamendo albums.
 
 
 ## Possible Future imrovements:

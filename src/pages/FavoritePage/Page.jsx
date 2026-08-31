@@ -25,9 +25,9 @@ export default function FavoritePage() {
 
   const handleSort = () => {
     if (sorted) {
-      tracksArray.sort((a, b) => a.popularity - b.popularity);
+      tracksArray.sort((a, b) => a.duration - b.duration);
     } else {
-      tracksArray.sort((a, b) => b.popularity - a.popularity);
+      tracksArray.sort((a, b) => b.duration - a.duration);
     }
     setFavTracksToRender(tracksArray);
     setSorted(!sorted);
@@ -52,7 +52,7 @@ export default function FavoritePage() {
             <span className="w-20"> Image </span>
             <span className=" pl-10 w-[20vw]"> Titles </span>
             <span className="flex flex-row justify-center gap-1 items-center">
-              Popularity
+              Duration
               <div
                 className="cursor-pointer hover:text-red-700"
                 onClick={handleSort}

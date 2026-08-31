@@ -3,19 +3,21 @@ import useFetchApi from "../../hooks/useFetchApi";
 import { useAtom } from "jotai";
 import { playListDataStore } from "../../lib/store";
 import PlayLists from "./PlayLists";
-
-const ENDPOINT = "https://api.spotify.com/v1/browse/featured-playlists";
+import {
+  FEATURED_ALBUMS_ENDPOINT,
+  mapAlbumsToPlaylistsResponse,
+} from "../../lib/jamendo";
 
 export default function FaeturedPlaylists() {
   const [, setPlayListStorage] = useAtom(playListDataStore);
-  const { data: playListsData } = useFetchApi(ENDPOINT);
+  const { data: jamendoData } = useFetchApi(FEATURED_ALBUMS_ENDPOINT);
 
   useEffect(() => {
     //sync atom state with fetched data
-    if (playListsData) {
-      setPlayListStorage(playListsData);
+    if (jamendoData?.results) {
+      setPlayListStorage(mapAlbumsToPlaylistsResponse(jamendoData));
     }
-  }, [playListsData, setPlayListStorage]);
+  }, [jamendoData, setPlayListStorage]);
 
   return (
     <section className="flex flex-col justify-center gap-10 items-center">

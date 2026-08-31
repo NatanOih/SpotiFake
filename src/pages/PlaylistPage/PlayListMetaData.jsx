@@ -7,14 +7,14 @@ export default function PlayListMetaData() {
 
   const description = playListData?.description || "";
   const name = playListData?.name || "";
-  const followers = playListData?.followers?.total || 0;
+  const releaseDate = playListData?.releaseDate || "";
   const imageUrl = playListData?.images?.[0]?.url || "";
 
   return (
     <section className="flex font-bold flex-col gap-2 max-w-[40vw] text-center justify-center items-center">
       <h1 className="lg:text-4xl sm:text-nowrap text-2xl"> {name} </h1>
       <span> {description} </span>
-      <span className=""> followers: {followers} </span>
+      <span className=""> Released: {releaseDate} </span>
       <img
         className="max-w-[70vw] md:max-w-[50vw] h-auto p-2 rounded-lg"
         src={imageUrl}

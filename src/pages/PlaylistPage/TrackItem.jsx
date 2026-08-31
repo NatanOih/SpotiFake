@@ -5,6 +5,15 @@ import { favoriteTracksStore } from "../../lib/store";
 import TrackNames from "./TrackNames";
 import { DeleteIcon } from "../../components/DeleteIcon";
 
+function formatDuration(totalSeconds) {
+  if (!Number.isFinite(totalSeconds)) {
+    return "--:--";
+  }
+  const minutes = Math.floor(totalSeconds / 60);
+  const seconds = String(totalSeconds % 60).padStart(2, "0");
+  return `${minutes}:${seconds}`;
+}
+
 export default function TrackItem({
   enableDeleteIcon = false,
   trackData,
@@ -12,7 +21,7 @@ export default function TrackItem({
 }) {
   const setFavoriteTracks = useSetAtom(favoriteTracksStore);
 
-  const { id, popularity, artists, name, album, external_urls } = trackData;
+  const { id, duration, artists, name, album, external_urls } = trackData;
   const imageUrl = album.images[0].url;
 
   const handleFav = () => {
@@ -25,7 +34,7 @@ export default function TrackItem({
       return {
         ...prev,
         [id]: {
-          popularity,
+          duration,
           artists,
           name,
           album,
@@ -47,16 +56,16 @@ export default function TrackItem({
       <TrackNames name={name} artists={artists} />
 
       <div className="flex tracking-tighter max-w-4 px-1  flex-col   text-center ">
-        <span> {popularity} </span>
+        <span> {formatDuration(duration)} </span>
       </div>
 
       <a
         className=" max-w-12 leading-5 items-center justify-center flex text-wrap text-center pl-6 hover:underline "
-        href={external_urls.spotify}
+        href={external_urls.jamendo}
         rel="noopener noreferrer"
         target="_blank"
       >
-        Open on Spotify
+        Open on Jamendo
       </a>
 
       <div

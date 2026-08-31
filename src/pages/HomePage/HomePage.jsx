@@ -1,4 +1,3 @@
-import useSpotifyAccess from "../../hooks/useSpotifyAccess";
 import FaeturedPlaylists from "./FaeturedPlaylists";
 
 import Nav from "../../components/Nav";
@@ -7,7 +6,6 @@ import { darkModeStorage } from "../../lib/store";
 
 export default function HomePage() {
   const darkMode = useAtomValue(darkModeStorage);
-  useSpotifyAccess();
 
   return (
     <>

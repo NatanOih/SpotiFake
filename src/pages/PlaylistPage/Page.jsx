@@ -8,6 +8,10 @@ import PlayListContainer from "./PlayListContainer";
 import { currentPlayListUsedStore, darkModeStorage } from "../../lib/store";
 import { useAtom, useAtomValue } from "jotai/react";
 import Nav from "../../components/Nav";
+import {
+  getAlbumTracksEndpoint,
+  mapAlbumTracksToPlaylistResponse,
+} from "../../lib/jamendo";
 
 export default function PlayListPage() {
   const darkMode = useAtomValue(darkModeStorage);
@@ -15,19 +19,19 @@ export default function PlayListPage() {
   const [, setCurrentPlayList] = useAtom(currentPlayListUsedStore);
 
   const { playlistid } = useParams();
-  const playlistURL = `https://api.spotify.com/v1/playlists/${playlistid}`;
+  const albumTracksURL = getAlbumTracksEndpoint(playlistid);
 
-  const { data: playListData } = useFetchApi(playlistURL);
+  const { data: jamendoData } = useFetchApi(albumTracksURL);
 
   useEffect(() => {
-    if (playListData) {
-      setCurrentPlayList(playListData);
+    if (jamendoData?.results) {
+      setCurrentPlayList(mapAlbumTracksToPlaylistResponse(jamendoData));
     }
 
     return () => {
       setCurrentPlayList([]);
     };
-  }, [playListData, setCurrentPlayList]);
+  }, [jamendoData, setCurrentPlayList]);
 
   return (
     <>
