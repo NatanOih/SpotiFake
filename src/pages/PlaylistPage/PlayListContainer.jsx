@@ -10,8 +10,8 @@ import TrackList from "./TrackList";
 import PlaylistItem from "../HomePage/PlaylistItem";
 
 export default function PlayListContainer() {
-  const [playListData, setPlayListData] = useAtom(currentPlayListUsedStore);
-  const [allPlayLists, setAllPlayLists] = useAtom(playListDataStore);
+  const [playListData] = useAtom(currentPlayListUsedStore);
+  const [allPlayLists] = useAtom(playListDataStore);
   const originalTracksArray = playListData.tracks?.items;
 
   const { searchInput, setSearchInput } = useFilter(originalTracksArray);

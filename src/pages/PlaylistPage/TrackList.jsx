@@ -1,5 +1,5 @@
 import { useAtom } from "jotai/react";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { favoriteTracksStore, tracksToRenderStore } from "../../lib/store";
 import TrackItem from "./TrackItem";
 import SortIcon from "../../components/SortIcon";
@@ -7,10 +7,8 @@ import Loading from "../../components/Loading";
 
 export default function TrackList() {
   const [tracksToRender, setTracksToRender] = useAtom(tracksToRenderStore);
-  const [favTracks, setFavTracks] = useAtom(favoriteTracksStore);
+  const [favTracks] = useAtom(favoriteTracksStore);
   const [sorted, setSorted] = useState(false);
-
-  const titles = ["Image", "Title", "Popularity", "Link", "Favorites"];
 
   const handleSort = () => {
     const sortedTracks = [...tracksToRender];

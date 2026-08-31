@@ -12,9 +12,7 @@ import Nav from "../../components/Nav";
 export default function PlayListPage() {
   const darkMode = useAtomValue(darkModeStorage);
 
-  const [currentPlayList, setCurrentPlayList] = useAtom(
-    currentPlayListUsedStore
-  );
+  const [, setCurrentPlayList] = useAtom(currentPlayListUsedStore);
 
   const { playlistid } = useParams();
   const playlistURL = `https://api.spotify.com/v1/playlists/${playlistid}`;

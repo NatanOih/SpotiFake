@@ -8,7 +8,6 @@ import HomePage from "./pages/HomePage/HomePage";
 import PlayListPage from "./pages/PlaylistPage/Page";
 import FavoritePage from "./pages/FavoritePage/Page";
 import Error from "./components/Error";
-import Nav from "./components/Nav";
 
 const router = createBrowserRouter([
   {

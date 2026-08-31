@@ -17,10 +17,10 @@ export default function FavoritePage() {
   const tracksArray = Object.values(favTracks);
   const [favTracksToRender, setFavTracksToRender] = useState([]);
   const [sorted, setSorted] = useState(false);
-  const [allPlayLists, setAllPlayLists] = useAtom(playListDataStore);
+  const [allPlayLists] = useAtom(playListDataStore);
 
   useEffect(() => {
-    setFavTracksToRender(tracksArray);
+    setFavTracksToRender(Object.values(favTracks));
   }, [favTracks]);
 
   const handleSort = () => {

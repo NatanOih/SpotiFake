@@ -1,4 +1,3 @@
-import { atom } from "jotai";
 import { atomWithStorage } from "jotai/utils";
 
 export const token = atomWithStorage("spotifyToken", null);

@@ -1,5 +1,4 @@
 import React from "react";
-import Headline from "../../components/Headline";
 import { useAtomValue } from "jotai";
 import { currentPlayListUsedStore } from "../../lib/store";
 
