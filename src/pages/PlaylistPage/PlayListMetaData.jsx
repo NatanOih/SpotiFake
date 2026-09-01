@@ -1,6 +1,7 @@
 import React from "react";
 import { useAtomValue } from "jotai";
 import { currentPlayListUsedStore } from "../../lib/store";
+import ImageWithLoader from "../../components/ImageWithLoader";
 
 export default function PlayListMetaData() {
   const playListData = useAtomValue(currentPlayListUsedStore);
@@ -15,11 +16,11 @@ export default function PlayListMetaData() {
       <h1 className="lg:text-4xl sm:text-nowrap text-2xl"> {name} </h1>
       <span> {description} </span>
       <span className=""> Released: {releaseDate} </span>
-      <img
-        className="max-w-[70vw] md:max-w-[50vw] h-auto p-2 rounded-lg"
+      <ImageWithLoader
         src={imageUrl}
         alt={name}
-        loading="lazy"
+        containerClassName="max-w-[70vw] md:max-w-[50vw] w-full aspect-square rounded-lg shadow-xl"
+        className="w-full h-full object-cover rounded-lg"
       />
     </section>
   );

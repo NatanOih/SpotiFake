@@ -1,6 +1,7 @@
 import React from "react";
 import { HeartIcon } from "../../components/HeartIcon";
 import { PlayIcon } from "../../components/PlayIcon";
+import ImageWithLoader from "../../components/ImageWithLoader";
 import { useAtom, useSetAtom } from "jotai";
 import { favoriteTracksStore, nowPlayingStore } from "../../lib/store";
 import TrackNames from "./TrackNames";
@@ -60,13 +61,19 @@ export default function TrackItem({
     });
   };
   return (
-    <div className="flex select-none w-full p-1 h-auto flex-row md:w-full  bg-green-100/50  rounded-md md:gap-10 sm:gap-6 gap-4  md:text-lg text-sm px-1  justify-between items-center">
-      <div className="relative">
-        <img
-          className="max-w-20 h-auto border-black border-2  rounded-sm"
+    <div
+      className={`flex select-none w-full p-1 h-auto flex-row md:w-full rounded-lg shadow-sm hover:shadow-md md:gap-10 sm:gap-6 gap-4 md:text-lg text-sm px-2 py-1.5 justify-between items-center transition-all ${
+        isPlaying
+          ? "bg-green-700/60 ring-1 ring-green-400/60"
+          : "bg-green-100/50 hover:bg-green-100/80"
+      }`}
+    >
+      <div className="relative rounded-md overflow-hidden shadow">
+        <ImageWithLoader
           src={imageUrl}
           alt={name}
-          loading="lazy"
+          containerClassName="w-20 h-20"
+          className="w-full h-full object-cover"
         />
         <button
           onClick={handlePlay}
