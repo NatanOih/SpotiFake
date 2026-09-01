@@ -1,4 +1,7 @@
+import { atom } from "jotai";
 import { atomWithStorage } from "jotai/utils";
+
+export const nowPlayingStore = atom(null);
 
 export const favoriteTracksStore = atomWithStorage("favoriteTracksStore", {});
 export const playListDataStore = atomWithStorage("playListDataStore", {});

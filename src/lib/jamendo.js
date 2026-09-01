@@ -1,7 +1,23 @@
 const CLIENT_ID = process.env.REACT_APP_JAMENDO_CLIENT_ID;
 const BASE_URL = "https://api.jamendo.com/v3.0";
 
-export const FEATURED_ALBUMS_ENDPOINT = `${BASE_URL}/albums/?client_id=${CLIENT_ID}&format=json&limit=30&order=popularity_total&imagesize=400`;
+export function getAlbumsEndpoint({ search = "", offset = 0, limit = 30 } = {}) {
+  const params = new URLSearchParams({
+    client_id: CLIENT_ID,
+    format: "json",
+    limit: String(limit),
+    offset: String(offset),
+    imagesize: "400",
+  });
+
+  if (search.trim()) {
+    params.set("namesearch", search.trim());
+  } else {
+    params.set("order", "popularity_total");
+  }
+
+  return `${BASE_URL}/albums/?${params.toString()}`;
+}
 
 export function getAlbumTracksEndpoint(albumId) {
   return `${BASE_URL}/albums/tracks/?client_id=${CLIENT_ID}&format=json&id=${albumId}&imagesize=400`;
@@ -9,11 +25,11 @@ export function getAlbumTracksEndpoint(albumId) {
 
 // Maps a Jamendo /albums/ list response onto the Spotify "featured playlists" shape
 // so the existing playlist-grid components don't need to know the data source changed.
-export function mapAlbumsToPlaylistsResponse(jamendoData) {
+export function mapAlbumsToPlaylistsResponse(jamendoData, message = "Popular Albums") {
   const albums = jamendoData?.results || [];
 
   return {
-    message: "Popular Albums",
+    message,
     playlists: {
       items: albums.map((album) => ({
         id: album.id,
@@ -50,6 +66,7 @@ export function mapAlbumTracksToPlaylistResponse(jamendoData) {
           name: track.name,
           artists: [{ name: album.artist_name }],
           album: { images: [{ url: album.image }] },
+          audio: track.audio,
           external_urls: { jamendo: `https://www.jamendo.com/album/${album.id}` },
         },
       })),
